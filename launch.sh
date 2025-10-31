@@ -64,6 +64,25 @@ if [ "$TABLES" = "" ] ; then
 	echo "Database initialized"
 fi
 
+for dir in "$CACTI_PATH"/plugins/plugin_* ; do
+	[ -d "$dir" ] || continue
+
+	basename="$(basename "$dir")"
+
+	newname="${basename#plugin_}"
+
+	newpath="$CACTI_PATH/plugins/$newname"
+
+	echo "$newname"
+
+	if [ -e "$newpath" ]; then
+		echo "le dossier $newpath existe déjà."
+		continue
+	fi
+
+	mv "$dir" "$newpath"
+done
+
 echo "Starting Apache..."
 
 crond
