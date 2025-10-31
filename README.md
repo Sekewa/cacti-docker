@@ -55,3 +55,25 @@ services:
 volumes:
     mariadb_data:
 ```
+
+## First connection
+
+The first time you'll connect to cacti, don't forget the user and password :
+- user, admin
+- password, admin
+
+After using them cacti will ask to change the password and you'll be set to use cacti !
+
+## Adding plugins
+
+If you want to add plugins in cacti, just add this line in your docker-compose :
+``` YAML
+servies:
+    ...
+    cacti:
+    ...
+        volumes:
+            - ./plugins:/var/www/html/cacti/plugins
+```
+
+The plugin name can start by 'plugin_*', if so no need to change the name, the container will do it by itself.
